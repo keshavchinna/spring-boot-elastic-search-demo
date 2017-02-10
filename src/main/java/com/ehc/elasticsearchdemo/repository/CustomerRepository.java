@@ -17,6 +17,9 @@
 package com.ehc.elasticsearchdemo.repository;
 
 import com.ehc.elasticsearchdemo.model.Customer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.annotations.Query;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 import java.util.List;
@@ -26,4 +29,7 @@ public interface CustomerRepository extends ElasticsearchRepository<Customer, Lo
   Customer findByFirstName(String firstName);
 
   List<Customer> findByLastName(String lastName);
+
+  @Query("{ \"query\": { \"filtered\": { \"filter\": { \"geo_distance\": { \"distance\": \"1km\", \"location\":\"?0\"} } } } }")
+  Page<Customer> findByLocationNear(String location, Pageable pageable);
 }

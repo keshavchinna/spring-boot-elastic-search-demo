@@ -16,7 +16,7 @@ public class HomeController {
 
   @RequestMapping(value = "/customer")
   public Customer createCustomer() {
-    Customer customer = new Customer(1, "mjsa", "fsdf");
+    Customer customer = new Customer(1, "mjsa", "fsdf","17.4286303,78.4154022");
     return customerRepository.save(customer);
   }
 }

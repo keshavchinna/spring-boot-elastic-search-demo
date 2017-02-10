@@ -2,6 +2,7 @@ package com.ehc.elasticsearchdemo.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.GeoPointField;
 
 /**
  * Created by ehc on 9/2/17.
@@ -12,11 +13,14 @@ public class Customer {
   private Long id;
   private String firstName;
   private String lastName;
+  @GeoPointField
+  private String location;
 
-  public Customer(long id, String name, String lastName) {
+  public Customer(long id, String name, String lastName, String location) {
     this.id = id;
     this.firstName = name;
     this.lastName = lastName;
+    this.location = location;
   }
 
   public Customer() {
@@ -47,11 +51,21 @@ public class Customer {
     this.lastName = lastName;
   }
 
+  public String getLocation() {
+    return location;
+  }
+
+  public void setLocation(String location) {
+    this.location = location;
+  }
+
   @Override
   public String toString() {
     return "Customer{" +
-        "firstName='" + firstName + '\'' +
+        "id=" + id +
+        ", firstName='" + firstName + '\'' +
         ", lastName='" + lastName + '\'' +
+        ", location='" + location + '\'' +
         '}';
   }
 }
